@@ -1,0 +1,29 @@
+#projectSection {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+  }
+  
+  .spline-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+  
+  .spline-container > div {
+    width: 100%;
+    height: 100%;
+  }
+  
+  .content-container {
+    position: relative;
+    z-index: 2;
+    padding: var(--padding);
+    width: 100%;
+    background: rgba(var(--bg-rgb), 0.9); /* Ajoutez une variable CSS pour la couleur de fond en RGB */
+    backdrop-filter: blur(10px);
+  }
+  

@@ -1,0 +1,43 @@
+.dock {
+    padding: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .dock-container {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    backdrop-filter: blur(10px);
+  }
+  
+  .social-links {
+    display: flex;
+    gap: 1.5rem;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .social-link-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .social-link {
+    color: #333;
+    transition: color 0.3s ease;
+  }
+  
+  .social-link:hover {
+    color: #666;
+  }
+  
+  /* Pour assurer que les icônes sont visibles */
+  .social-link svg {
+    display: block;
+    width: 24px;
+    height: 24px;
+  }
