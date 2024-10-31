@@ -56,7 +56,9 @@ const Intro = () => {
   return (
     <main style={styles.mainBg}>
       <div style={styles.splineContainer}>
-        <Spline scene="https://prod.spline.design/uHbhl2y0pbIFZWXr/scene.splinecode" />
+      <Spline
+        scene="https://prod.spline.design/qhkmDJNZoY6n7rPt/scene.splinecode" 
+      />      
       </div>
 
       <div style={styles.contentWrapper}>
