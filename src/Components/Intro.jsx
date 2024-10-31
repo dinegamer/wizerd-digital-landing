@@ -1,13 +1,10 @@
 import React, { useEffect, useRef, useState } from "react";
 import SvgIcon from "./SvgIcon";
 import Logo from "./logo.svg";
-// Pour utiliser Spline, il faut d'abord l'installer avec :
-// npm install @splinetool/react-spline @splinetool/runtime
 import Spline from '@splinetool/react-spline';
 
 const Intro = () => {
   const nameRef = useRef(null);
-  const greetingRef = useRef(null);
   const soundRef = useRef(new Audio("Sound2.wav"));
   const letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   let interval = null;
@@ -18,7 +15,7 @@ const Intro = () => {
       let iteration = 0;
       clearInterval(interval);
       interval = setInterval(() => {
-        element.innerText = element.innerText
+        element.innerText = element.dataset.value
           .split("")
           .map((letter, index) =>
             index < iteration
@@ -34,7 +31,6 @@ const Intro = () => {
     };
 
     const handleMouseOver = () => {
-      animateText(greetingRef.current);
       animateText(nameRef.current);
 
       if (soundEnabled) {
@@ -42,17 +38,11 @@ const Intro = () => {
       }
     };
 
-    const greetingElement = greetingRef.current;
     const nameElement = nameRef.current;
-
-    greetingElement.dataset.value = greetingElement.innerText;
     nameElement.dataset.value = nameElement.innerText;
-
-    greetingElement.addEventListener("mouseover", handleMouseOver);
     nameElement.addEventListener("mouseover", handleMouseOver);
 
     return () => {
-      greetingElement.removeEventListener("mouseover", handleMouseOver);
       nameElement.removeEventListener("mouseover", handleMouseOver);
       clearInterval(interval);
     };
@@ -65,10 +55,8 @@ const Intro = () => {
 
   return (
     <main style={styles.mainBg}>
-      {/* Spline background */}
       <div style={styles.splineContainer}>
-        {/* Remplacer ce commentaire par le composant Spline une fois installé */}
-        <Spline scene="https://prod.spline.design/uHbhl2y0pbIFZWXr/scene.splinecode" /> 
+        <Spline scene="https://prod.spline.design/uHbhl2y0pbIFZWXr/scene.splinecode" />
       </div>
 
       <div style={styles.contentWrapper}>
@@ -77,14 +65,18 @@ const Intro = () => {
         <div style={styles.borderContainer}>
           <div style={styles.container}>
             <div style={styles.content}>
-              <h1 style={styles.mainTitle}>
-                <span ref={greetingRef} data-value="Hii! I'm" style={styles.animatedText}>
-                  Hii! We are
-                </span>{" "}
-                <span ref={nameRef} data-value="3DigitalWizardry" style={styles.animatedTextHighlight}>
-                  3DigitalWizardry
-                </span>
-              </h1>
+              <div style={styles.titleContainer}>
+                <h1 style={styles.mainTitle}>
+                  <div style={styles.greeting}>Hii! We are</div>
+                  <div 
+                    ref={nameRef} 
+                    data-value="3DigitalWizardry" 
+                    style={styles.animatedTextHighlight}
+                  >
+                    3DigitalWizardry
+                  </div>
+                </h1>
+              </div>
               <p style={styles.whoWeAre}>
                 Crafting digital experiences with{" "}
                 <span style={styles.highlight}>Innovation</span> &{" "}
@@ -131,54 +123,56 @@ const styles = {
     position: "absolute",
     top: "20px",
     left: "20px",
-    width: "220px",
+    width: "clamp(120px, 15vw, 220px)",
     height: "auto",
     animation: "pulse 2s infinite",
     filter: "drop-shadow(0 0 10px rgba(0, 0, 0, 0.1))",
     transition: "transform 0.3s ease",
-    ":hover": {
-      transform: "scale(1.05)",
-    },
   },
   borderContainer: {
     background: "#fff",
     borderRadius: "20px",
     boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
     padding: "2px",
-    marginTop: "100px",
+    width: "90%",
+    maxWidth: "900px",
+    margin: "100px auto 0",
   },
   container: {
-    padding: "40px",
+    padding: "clamp(20px, 4vw, 40px)",
     borderRadius: "18px",
     background: "#fff",
   },
   content: {
     textAlign: "center",
   },
-  mainTitle: {
-    fontSize: "4rem",
+  titleContainer: {
     marginBottom: "20px",
-    lineHeight: 1.2,
+    padding: "0 10px",
+  },
+  mainTitle: {
+    margin: 0,
+    padding: 0,
     fontWeight: "bold",
   },
-  animatedText: {
-    display: "inline-block",
-    transition: "color 0.3s ease",
+  greeting: {
     color: "#ff0033",
-    fontSize: "4rem",
+    fontSize: "clamp(1.5rem, 4vw, 3rem)",
+    marginBottom: "10px",
   },
   animatedTextHighlight: {
-    display: "inline-block",
-    transition: "color 0.3s ease",
     color: "#ff3366",
     fontWeight: "800",
-    fontSize: "4rem",
+    fontSize: "clamp(2rem, 5vw, 4rem)",
+    lineHeight: "1.2",
+    wordBreak: "break-word",
   },
   whoWeAre: {
-    fontSize: "1.8rem",
+    fontSize: "clamp(1.1rem, 2.5vw, 1.8rem)",
     color: "#333",
     marginBottom: "30px",
     lineHeight: 1.5,
+    padding: "0 10px",
   },
   highlight: {
     color: "#ff0033",
@@ -192,9 +186,6 @@ const styles = {
     color: "#ff0033",
     fontSize: "24px",
     transition: "all 0.2s ease",
-    ":hover": {
-      transform: "scale(1.1)",
-    },
   },
 };
 
