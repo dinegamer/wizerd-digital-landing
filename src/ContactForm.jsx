@@ -91,6 +91,8 @@ const ContactForm = () => {
               required
               className="form-input"
               autoComplete="email"
+              style={{ color: 'black', backgroundColor: 'white' }} // Ajustez les couleurs pour voir si l'affichage change
+
             />
           </div>
 
